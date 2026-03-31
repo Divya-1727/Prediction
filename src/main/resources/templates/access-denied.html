@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Access-Denied</title>
+
+    <style>
+        body{
+        margin:0;
+        font-family:'Segoe UI', sans-serif;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+        }
+
+        .container{
+        background:white;
+        padding:50px;
+        width:400px;
+        text-align:center;
+        border-radius:12px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.3);
+        animation:fadeIn 1s ease;
+        }
+
+        h1{
+        color:#e74c3c;
+        margin-bottom:10px;
+        }
+
+        p{
+        color:#555;
+        font-size:18px;
+        }
+
+        a{
+        display:inline-block;
+        margin-top:20px;
+        padding:12px 25px;
+        text-decoration:none;
+        background:#27ae60;
+        color:white;
+        border-radius:6px;
+        font-weight:bold;
+        transition:0.3s;
+
+        }
+
+        a:hover{
+        background:#1e8449;
+        transform:scale(1.05);
+        }
+
+        @Keyframes fadeIn{
+        from{
+        opacity:0;
+        transform:translateY(20px);
+        }
+        to{
+        opacity:1;
+        transform:translateY(0);
+        }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+<h2 style="color:red;">Access Denied</h2>
+
+<p>You do not have permission to access the admin panel. </p>
+
+<a href="/">⬅go back to home</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>carbon analysis </title>
+    <style>
+        body {
+           font-family: 'Segoe UI', sans-serif;
+           background: linear-gradient(to right, #43cea2, #185a9d);
+           margin: 0;
+           padding: 0;
+       }
+
+       h2 {
+           text-align: center;
+           color: white;
+           margin-top: 40px;
+       }
+
+       .card {
+           width: 420px;
+           margin: 40px auto;
+           background: #ffffff;
+           padding: 30px;
+           border-radius: 15px;
+           box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+       }
+
+       .section {
+           margin-bottom: 20px;
+           padding: 15px;
+           border-radius: 10px;
+       }
+
+       .actual {
+           background-color: #e3f2fd;
+           border-left: 5px solid #2196f3;
+       }
+
+       .predicted {
+           background-color: #fff3e0;
+           border-left: 5px solid #ff9800;
+       }
+
+       .suggestion {
+           background-color: #e8f5e9;
+           border-left: 5px solid #4caf50;
+       }
+
+       p {
+           font-size: 16px;
+           margin: 8px 0;
+           color: #333;
+       }
+
+       b {
+           font-size: 18px;
+           color: #000;
+       }
+
+       .footer {
+           text-align: center;
+           margin-top: 20px;
+           font-size: 14px;
+           color: #666;
+       }
+
+       .btn {
+           display: block;
+           width: 100%;
+           text-align: center;
+           padding: 12px;
+           margin-top: 20px;
+           background: linear-gradient(to right, #43cea2, #185a9d);
+           color: white;
+           text-decoration: none;
+           border-radius: 8px;
+           font-weight: bold;
+           transition: 0.3s;
+       }
+
+       .btn:hover {
+           opacity: 0.9;
+       }
+
+
+        .nav{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:15px 30px;
+        background:linear-gradient(to right, #43cea2, #3b6a9b);
+        color:white;
+        font-weight:bold;
+        }
+
+
+
+        .nav-link{
+        margin-left:20px;
+        text-decoration:none;
+        color:white;
+        padding:8px 14px;
+        border-radius:6px;
+        transition:0.3s;
+
+        }
+
+
+        .nav-link:hover{
+        background-color:linear-gradient(to right, #43cea2, #185a9d);
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<nav class="nav">
+    <div class="nav-left">
+        <h2>🌍 Carbon Analysis Report</h2>
+
+    </div>
+
+    <div class="nav-right">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/admin" class="nav-link">Admin Panel</a>
+        <a href="/tips.html" class="nav-link">Carbon Tips</a>
+    </div>
+</nav>
+
+
+
+
+<div class="card">
+
+    <div class="section actual">
+        <p>Total Calculated Carbon:</p>
+        <b th:text="${energy.actualCarbon}"></b>
+    </div>
+
+    <div class="section predicted">
+        <p>Total Predicted Carbon:</p>
+        <b th:text="${energy.predictedCarbon}"></b>
+    </div>
+
+    <div class="section suggestion">
+        <p>⚡ Suggested Electricity:</p>
+        <b th:text="${energy.suggestedElectricity}"></b>
+
+        <p>⛽ Suggested Petrol:</p>
+        <b th:text="${energy.suggestedPetrol}"></b>
+    </div>
+
+    <a href="/" class="btn">⬅ Back to Home</a>
+
+</div>
+</body>
+</html>

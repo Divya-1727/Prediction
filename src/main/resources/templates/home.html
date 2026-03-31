@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carbon Prediction App</title>
+    <style>
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background: linear-gradient(to right, #56ab2f, #a8e063);
+          margin: 0;
+          padding: 0;
+      }
+
+      h2 {
+          text-align: center;
+          color: white;
+          margin-top: 40px;
+          letter-spacing: 1px;
+      }
+
+      form {
+          background: white;
+          width: 350px;
+          margin: 40px auto;
+          padding: 25px 30px;
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      label {
+          font-weight: 600;
+          color: #333;
+      }
+
+      input {
+          width: 100%;
+          padding: 10px;
+          margin-top: 6px;
+          margin-bottom: 18px;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          transition: 0.3s;
+      }
+
+      input:focus {
+          border-color: #56ab2f;
+          outline: none;
+          box-shadow: 0 0 5px rgba(86, 171, 47, 0.5);
+      }
+
+      button {
+          width: 100%;
+          padding: 12px;
+          background: linear-gradient(to right, #56ab2f, #3ca55c);
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: 0.3s;
+      }
+
+      button:hover {
+          background: linear-gradient(to right, #3ca55c, #2e7d32);
+      }
+
+      button:active {
+          transform: scale(0.98);
+      }
+
+        .nav{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:15px 30px;
+        background:rgba(0,120,0,0.8);
+        color:white;
+        font-weight:bold;
+        }
+
+
+
+        .nav-link{
+        margin-left:20px;
+        text-decoration:none;
+        color:white;
+        padding:8px 14px;
+        border-radius:6px;
+        transition:0.3s;
+
+        }
+
+
+        .nav-link:hover{
+        background-color:rgba(255,255,255,0.2);
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<nav class="nav">
+<div class="nav-left">
+
+<h2>🌱 CLEAN AND GREEN CARBON TRACKER</h2>
+
+</div>
+
+<div class="nav-right">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/admin" class="nav-link">Admin Panel</a>
+    <a href="/tips" class="nav-link">Carbon Tips</a>
+    <a href="/login" class="nav-link">Log Out</a>
+</div>
+
+
+</nav>
+
+
+
+
+
+<form th:action="@{/create}" th:object="${energy}" method="post">
+    <label>Electricity Consumed(KWh)⚡:</label>
+    <input type="number" th:field="*{consumedElectricity}" required/> <br><br>
+
+    <label>Petrol Consumed(litres)⛽:</label>
+    <input type="number" th:field="*{consumedPetrol}" required/><br><br>
+
+    <label>Wastage(Kg):</label>
+    <input type="number" th:field="*{wastage}" required/><br><br>
+
+    <button type="submit">Calculate</button>
+
+
+</form>
+
+
+
+
+
+</body>
+</html>
