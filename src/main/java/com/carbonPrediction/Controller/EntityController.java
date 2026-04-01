@@ -1,6 +1,7 @@
 package com.carbonPrediction.Controller;
 
 import com.carbonPrediction.Entity.CarbonEntities;
+import com.carbonPrediction.Repository.CarbonRepository;
 import com.carbonPrediction.Service.CarbonService;
 import com.carbonPrediction.dto.SuggestedValues;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EntityController {
     @Autowired
     private CarbonService carbonService;
+    @Autowired
+    private CarbonRepository carbonRepository;
     @GetMapping("/")
     public String home(Model model){
         model.addAttribute("energy",new CarbonEntities());
@@ -29,6 +32,7 @@ public class EntityController {
      carbonEntities.setSuggestedElectricity(value.getSuggestedElectricity());
      carbonEntities.setSuggestedPetrol(value.getSuggestedPetrol());
       model.addAttribute("energy",carbonEntities);
+      carbonRepository.save(carbonEntities);
       return "predicted";
     }
 }

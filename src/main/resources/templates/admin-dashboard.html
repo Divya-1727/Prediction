@@ -2,51 +2,200 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin Dashboard</title>
+
+    <style>
+        /* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    min-height: 100vh;
+    color: white;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.admin-container {
+    padding: 40px;
+    text-align: center;
+}
+
+/* ===== TITLE ===== */
+.title {
+    font-size: 36px;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* ===== CARD ===== */
+.table-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 25px rgba(0,255,150,0.3);
+    animation: slideUp 1s ease;
+    overflow-x:auto;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* HEADER */
+thead {
+    background: #00c853;
+}
+
+thead th {
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+}
+
+/* BODY */
+tbody tr {
+    background: rgba(255,255,255,0.05);
+    transition: 0.3s;
+    animation:fadeIn 0.8s ease forwards;
+}
+
+/* HOVER EFFECT */
+tbody tr:hover {
+    background: rgba(0,255,150,0.2);
+    transform: scale(1.01);
+}
+
+/* CELLS */
+td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== DOWNLOAD BUTTON ===== */
+button,
+input[type="submit"] {
+    background: linear-gradient(45deg,#00e676,#00c853);
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00ff9d;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #00c853;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #00e676;
+    transform: translateY(-3px);
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+    </style>
 </head>
 <body>
 
-<h2>🛠 Admin Panel - Energy Records</h2>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Electricity</th>
-        <th>Petrol</th>
-        <th>Waste</th>
-        <th>Calculated Carbon</th>
-        <th>Predicted Carbon</th>
-        <th>Suggested Electricity</th>
-        <th>Suggested Petrol</th>
-        <th>Date</th>
-        <th>Action</th> <!-- NEW -->
-    </tr>
+<div class="admin-container">
 
-    <tr th:each="e : ${admin}">
-        <td th:text="${e.id}"></td>
-        <td th:text="${e.electricityKwh}"></td>
-        <td th:text="${e.petrolLiters}"></td>
-        <td th:text="${e.wasteKg}"></td>
-        <td th:text="${e.carbonFootprint}"></td>
-        <td th:text="${e.predictedCarbon}"></td>
-        <td th:text="${e.recommendedElectricity}"></td>
-        <td th:text="${e.recommendedPetrol}"></td>
-        <td th:text="${e.createdAt}"></td>
+    <h1 class="title">🌱 Carbon Prediction Admin Panel 🛠</h1>
 
-        <!-- Download Button -->
-        <td>
-            <a th:href="@{/admin/download/{id}(id=${e.id})}">
-                <button>⬇ Download</button>
-            </a>
-        </td>
-    </tr>
+    <div class="table-card">
 
-</table>
+        <h2>Energy Records</h2>
 
-<br>
-<a href="/admin/download">
-    <button>⬇ Download Report (CSV)</button>
-</a>
-<a href="/"> Back to Dashboard</a>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Electricity</th>
+                <th>Petrol</th>
+                <th>Waste</th>
+                <th>Calculated Carbon</th>
+                <th>Predicted Carbon</th>
+                <th>Suggested Electricity</th>
+                <th>Suggested Petrol</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tr th:each="e : ${admin}">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.consumedElectricity}"></td>
+                <td th:text="${e.consumedPetrol}"></td>
+                <td th:text="${e.wastage}"></td>
+                <td th:text="${e.actualCarbon}"></td>
+                <td th:text="${e.predictedCarbon}"></td>
+                <td th:text="${e.suggestedElectricity}"></td>
+                <td th:text="${e.suggestedPetrol}"></td>
+
+
+                <td>
+                    <a th:href="@{/admin/download/{id}(id=${e.id})}">
+                        <button>⬇ Download</button>
+                    </a>
+                </td>
+
+            </tr>
+
+
+        </table>
+
+        <a href="/" class="back-btn">⬅ Back to Dashboard</a>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
 
 </body>
 </html>
