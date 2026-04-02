@@ -5,11 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class CarbonEntities {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
+    private String username;
 private double consumedElectricity;
 private double consumedPetrol;
 private double wastage;
@@ -17,6 +20,7 @@ private double actualCarbon;
 private double predictedCarbon;
 private double suggestedElectricity;
 private double suggestedPetrol;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public double getSuggestedElectricity() {
         return suggestedElectricity;
@@ -80,5 +84,22 @@ private double suggestedPetrol;
 
     public void setPredictedCarbon(double predictedCarbon) {
         this.predictedCarbon = predictedCarbon;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
