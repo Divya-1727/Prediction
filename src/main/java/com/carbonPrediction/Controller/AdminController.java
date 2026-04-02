@@ -34,10 +34,10 @@ public class AdminController {
         var e = carbonRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        StringBuilder csv = new StringBuilder();
-        csv.append("ID,Electricity,Petrol,Waste,Carbon,Predicted,SuggestedElectricity,SuggestedPetrol,Date\n");
+        StringBuilder pdf = new StringBuilder();
+        pdf.append("ID,Electricity,Petrol,Waste,Carbon,Predicted,SuggestedElectricity,SuggestedPetrol,Date\n");
 
-        csv.append(e.getId()).append(",")
+        pdf.append(e.getId()).append(",")
                 .append(e.getConsumedElectricity()).append(",")
                 .append(e.getConsumedPetrol()).append(",")
                 .append(e.getWastage()).append(",")
@@ -50,7 +50,7 @@ public class AdminController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=energy-" + id + ".pdf")
                 .contentType(MediaType.TEXT_PLAIN)
-                .body(csv.toString());
+                .body(pdf.toString());
     }
 }
 
