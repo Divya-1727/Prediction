@@ -136,6 +136,7 @@
         <a href="/">Home</a>
         <a href="/admin">Admin Panel</a>
         <a href="/tips">Carbon Tips</a>
+        <a href="/admin/users" sec:authorize="hasRole('ADMIN')">Create User</a>
         <a href="/logout">Logout</a> <!-- ✅ FIXED -->
     </div>
 </nav>
