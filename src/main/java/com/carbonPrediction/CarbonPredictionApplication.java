@@ -37,18 +37,18 @@ public class CarbonPredictionApplication {
 							.orElseGet(() -> roleRepository.save(new Role(null, name))))
 					.collect(Collectors.toList());
 
-			if (userRepository.findByUsername("admin").isEmpty()) {
-
-				User admin = new User();
-				admin.setUsername("admin");
-				admin.setPassword(passwordEncoder.encode("admin1234"));
-				admin.setEnabled(true);
-				admin.setRoles(adminRole.stream().collect(Collectors.toSet()));
-
-				userRepository.save(admin);
-
-				System.out.println("✅ Default admin created: admin / admin1234");
-			}
+//			if (userRepository.findByUsername("admin").isEmpty()) {
+//
+//				User admin = new User();
+//				admin.setUsername("admin");
+//				admin.setPassword(passwordEncoder.encode("admin1234"));
+//				admin.setEnabled(true);
+//				admin.setRoles(adminRole.stream().collect(Collectors.toSet()));
+//
+//				userRepository.save(admin);
+//
+//				System.out.println("✅ Default admin created: admin / admin1234");
+//			}
 		};
 	}
 

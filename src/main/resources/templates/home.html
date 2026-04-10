@@ -136,8 +136,16 @@
         <a href="/">Home</a>
         <a href="/admin">Admin Panel</a>
         <a href="/tips">Carbon Tips</a>
-        <a href="/admin/users" sec:authorize="hasRole('ADMIN')">Create User</a>
-        <a href="/logout">Logout</a> <!-- ✅ FIXED -->
+<!--        <a href="/admin/users" sec:authorize="hasRole('ADMIN')">Create User</a>-->
+        <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
+            Logout
+        </a>
+
+        <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
+        </form>
     </div>
 </nav>
 
