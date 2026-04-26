@@ -1,7 +1,5 @@
 package com.carbonPrediction.Controller;
 
-import com.carbonPrediction.Entity.User;
-import com.carbonPrediction.Repository.UserRepository;
 import com.carbonPrediction.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -29,7 +26,6 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-
     public String registerUser(@RequestParam String username,
                                @RequestParam String password,
                                @RequestParam String role) {
