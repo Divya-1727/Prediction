@@ -4,135 +4,119 @@
     <title>Admin Dashboard</title>
 
     <style>
-        /* ===== BODY ===== */
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    min-height: 100vh;
-    color: white;
-}
+        body {
+       margin: 0;
+       font-family: Arial, sans-serif;
 
-/* ===== MAIN CONTAINER ===== */
-.admin-container {
-    padding: 40px;
-    text-align: center;
-}
+       /* 🌄 Different but matching green/nature background */
+     background: url('https://images.unsplash.com/photo-1472145246862-b24cf25c4a36?auto=format&fit=crop&w=1600&q=80')
+            no-repeat center center/cover;
 
-/* ===== TITLE ===== */
-.title {
-    font-size: 36px;
-    margin-bottom: 30px;
-    animation: fadeIn 1s ease-in-out;
-}
+       min-height: 100vh;
+   }
 
-/* ===== CARD ===== */
-.table-card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 25px rgba(0,255,150,0.3);
-    animation: slideUp 1s ease;
-    overflow-x:auto;
-}
+   /* overlay (same theme consistency) */
+   body::before {
+       content: "";
+       position: fixed;
+       inset: 0;
+       background: rgba(0, 40, 20, 0.72);
+       z-index: 0;
+   }
 
-/* ===== TABLE ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    overflow: hidden;
-    border-radius: 10px;
-}
+   /* MAIN CONTAINER */
+   .admin-container {
+       position: relative;
+       z-index: 1;
+       padding: 40px;
+       text-align: center;
+   }
 
-/* HEADER */
-thead {
-    background: #00c853;
-}
+   /* TITLE */
+   .title {
+       color: #b9fbc0;
+       margin-bottom: 25px;
+   }
 
-thead th {
-    padding: 15px;
-    color: white;
-    font-weight: bold;
-}
+   /* GLASS CARD */
+   .table-card {
+       width: 95%;
+       margin: auto;
+       padding: 25px;
+       border-radius: 14px;
+overflow-x: auto;
+       background: rgba(255, 255, 255, 0.12);
+       backdrop-filter: blur(12px);
 
-/* BODY */
-tbody tr {
-    background: rgba(255,255,255,0.05);
-    transition: 0.3s;
-    animation:fadeIn 0.8s ease forwards;
-}
+       color: white;
+       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+   }
 
-/* HOVER EFFECT */
-tbody tr:hover {
-    background: rgba(0,255,150,0.2);
-    transform: scale(1.01);
-}
+   /* TABLE */
+   table {
+       width: 100%;
+       border-collapse: collapse;
+       margin-top: 15px;
+       font-size: 14px;
+   }
 
-/* CELLS */
-td {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
+   th, td {
+       padding: 10px;
+       text-align: center;
+   }
 
-/* ===== DOWNLOAD BUTTON ===== */
-button,
-input[type="submit"] {
-    background: linear-gradient(45deg,#00e676,#00c853);
-    border: none;
-    padding: 8px 15px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+   /* HEADER */
+   th {
+       background: rgba(255,255,255,0.15);
+       color: #b9fbc0;
+   }
 
-button:hover,
-input[type="submit"]:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px #00ff9d;
-}
+   /* ROWS */
+   td {
+       background: rgba(255,255,255,0.05);
+   }
 
-/* ===== BACK BUTTON ===== */
-.back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #00c853;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: 0.3s;
-}
+   /* hover effect */
+   tr:hover td {
+       background: rgba(255,255,255,0.12);
+       transition: 0.3s;
+   }
 
-.back-btn:hover {
-    background: #00e676;
-    transform: translateY(-3px);
-}
+   /* BUTTON */
+   button {
+       padding: 6px 10px;
+       border: none;
+       border-radius: 6px;
 
-/* ===== ANIMATIONS ===== */
+       background: #2ecc71;
+       color: white;
+       font-weight: bold;
+       cursor: pointer;
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-    }
-}
+       transition: 0.3s;
+   }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-    to {
-        opacity: 1;
-    }
-}
+   button:hover {
+       background: #27ae60;
+   }
 
+   /* BACK BUTTON */
+   .back-btn {
+       display: inline-block;
+       margin-top: 20px;
+       padding: 10px 15px;
+
+       background: #2ecc71;
+       color: white;
+       text-decoration: none;
+       border-radius: 6px;
+
+       transition: 0.3s;
+   }
+
+   .back-btn:hover {
+       background: #27ae60;
+   }
 
     </style>
 </head>
@@ -190,12 +174,7 @@ input[type="submit"]:hover {
 
 
 
-
-
-
-
 </div>
-
 
 </body>
 </html>

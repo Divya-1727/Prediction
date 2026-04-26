@@ -1,7 +1,6 @@
 package com.carbonPrediction;
 
 import com.carbonPrediction.Entity.Role;
-import com.carbonPrediction.Entity.User;
 import com.carbonPrediction.Repository.RoleRepository;
 import com.carbonPrediction.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
