@@ -150,8 +150,10 @@
 
     <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/admin">Admin Panel</a>
-    <a href="/admin/users" sec:authorize="hasRole('ADMIN')">Create User</a>
+        <a href="/admin">Dashboard</a>
+            <a href="/admin/users">Create User</a>
+
+
         <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
             Logout
         </a>
