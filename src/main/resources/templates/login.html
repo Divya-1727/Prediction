@@ -1,24 +1,146 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        background: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e') no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Dark + green overlay for theme consistency */
+    body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 50, 20, 0.75)
+        );
+        top: 0;
+        left: 0;
+    }
+
+    .login-card {
+        position: relative;
+        z-index: 1;
+        width: 360px;
+        padding: 35px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 25px rgba(0,0,0,0.6);
+        text-align: center;
+        color: #fff;
+    }
+
+    .login-card h2 {
+        margin-bottom: 10px;
+        color: #00e676;
+        letter-spacing: 1px;
+    }
+
+    .login-card p.title {
+        font-size: 13px;
+        margin-bottom: 20px;
+        color: #ccc;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 6px;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    input::placeholder {
+        color: #bbb;
+    }
+
+    input:focus {
+        outline: none;
+        border: 1px solid #00e676;
+        box-shadow: 0 0 8px rgba(0,230,118,0.6);
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #00e676, #00c853);
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #00c853;
+        box-shadow: 0 5px 15px rgba(0,230,118,0.4);
+    }
+
+    .error {
+        margin-top: 10px;
+        color: #ff5252;
+        font-size: 13px;
+    }
+
+    .register {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .register a {
+        color: #00e676;
+        text-decoration: none;
+    }
+
+    .register a:hover {
+        text-decoration: underline;
+    }
+
+
+    </style>
+</head>
 <body>
+<div class="login-card">
+    <h2>Carbon Prediction System</h2>
+    <p class="title">Building a Sustainable Future 🌱</p>
 
-<h2>Login</h2>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Enter Username" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
 
-<form th:action="@{/login}" method="post">
+        <button type="submit">Login</button>
+    </form>
 
-    <input type="text" name="username" placeholder="Username"/><br><br>
-    <input type="password" name="password" placeholder="Password"/><br><br>
+    <p th:if="${param.error}" class="error">
+        Invalid username/password
+    </p>
 
-    <button type="submit">Login</button>
-</form>
-
-<p th:if="${param.error}" style="color:red;">
-    Invalid username/password
-</p>
-
-<p>
-    New User? <a th:href="@{/register}">Register</a>
-</p>
+    <div class="register">
+        New User? <a th:href="@{/register}">Register</a>
+    </div>
+</div>
 
 </body>
 </html>

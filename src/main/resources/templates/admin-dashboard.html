@@ -1,201 +1,476 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Carbon Prediction Admin</title>
 
     <style>
-        /* ===== BODY ===== */
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    min-height: 100vh;
-    color: white;
-}
 
-/* ===== MAIN CONTAINER ===== */
-.admin-container {
-    padding: 40px;
-    text-align: center;
-}
+       *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
 
-/* ===== TITLE ===== */
-.title {
-    font-size: 36px;
-    margin-bottom: 30px;
-    animation: fadeIn 1s ease-in-out;
-}
+        body{
+            min-height:100vh;
+            display:flex;
+            background:
+                linear-gradient(rgba(5,20,10,0.78), rgba(5,20,10,0.86)),
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop');
+            background-size:cover;
+            background-position:center;
+            color:white;
+            overflow-x:hidden;
+        }
 
-/* ===== CARD ===== */
-.table-card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 25px rgba(0,255,150,0.3);
-    animation: slideUp 1s ease;
-    overflow-x:auto;
-}
+        /* SIDEBAR */
 
-/* ===== TABLE ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    overflow: hidden;
-    border-radius: 10px;
-}
+        .sidebar{
+            width:260px;
+            min-height:100vh;
+            background:rgba(0,0,0,0.35);
+            backdrop-filter:blur(14px);
+            border-right:1px solid rgba(255,255,255,0.08);
+            padding:30px 20px;
+            position:fixed;
+            left:0;
+            top:0;
+        }
 
-/* HEADER */
-thead {
-    background: #00c853;
-}
+        .sidebar h2{
+            color:#b9ffbf;
+            margin-bottom:40px;
+            font-size:28px;
+            text-align:center;
+        }
 
-thead th {
-    padding: 15px;
-    color: white;
-    font-weight: bold;
-}
+        .sidebar a{
+            display:block;
+            text-decoration:none;
+            color:white;
+            padding:15px 18px;
+            margin-bottom:15px;
+            border-radius:14px;
+            transition:0.3s;
+            font-size:16px;
+            background:rgba(255,255,255,0.03);
+        }
 
-/* BODY */
-tbody tr {
-    background: rgba(255,255,255,0.05);
-    transition: 0.3s;
-    animation:fadeIn 0.8s ease forwards;
-}
+        .sidebar a:hover{
+            background:rgba(113,255,160,0.15);
+            transform:translateX(5px);
+            color:#8fffaf;
+        }
 
-/* HOVER EFFECT */
-tbody tr:hover {
-    background: rgba(0,255,150,0.2);
-    transform: scale(1.01);
-}
+        /* MAIN */
 
-/* CELLS */
-td {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
+        .main{
+            margin-left:260px;
+            width:calc(100% - 260px);
+            padding:30px;
+        }
 
-/* ===== DOWNLOAD BUTTON ===== */
-button,
-input[type="submit"] {
-    background: linear-gradient(45deg,#00e676,#00c853);
-    border: none;
-    padding: 8px 15px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        /* TOPBAR */
 
-button:hover,
-input[type="submit"]:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px #00ff9d;
-}
+        .topbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:35px;
+            padding:20px 25px;
+            background:rgba(255,255,255,0.07);
+            backdrop-filter:blur(12px);
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.08);
+        }
 
-/* ===== BACK BUTTON ===== */
-.back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #00c853;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: 0.3s;
-}
+        .topbar h1{
+            font-size:34px;
+            color:#d8ffdc;
+        }
 
-.back-btn:hover {
-    background: #00e676;
-    transform: translateY(-3px);
-}
+        .search-box input{
+            padding:14px 18px;
+            width:280px;
+            border:none;
+            outline:none;
+            border-radius:12px;
+            background:rgba(255,255,255,0.12);
+            color:white;
+            font-size:15px;
+        }
 
-/* ===== ANIMATIONS ===== */
+        .search-box input::placeholder{
+            color:#ddd;
+        }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-    }
-}
+        /* CARDS */
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-    to {
-        opacity: 1;
-    }
-}
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:25px;
+            margin-bottom:35px;
+        }
 
+        .card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(10px);
+            border-radius:20px;
+            padding:28px;
+            border:1px solid rgba(255,255,255,0.08);
+            transition:0.4s;
+        }
+
+        .card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 10px 25px rgba(0,0,0,0.35);
+        }
+
+        .card h3{
+            color:#baffc6;
+            margin-bottom:15px;
+            font-size:18px;
+        }
+
+        .number{
+            font-size:38px;
+            font-weight:bold;
+            color:white;
+        }
+
+        /* TABLE CARD */
+
+        .table-card{
+            background:rgba(255,255,255,0.07);
+            backdrop-filter:blur(12px);
+            border-radius:22px;
+            padding:25px;
+            border:1px solid rgba(255,255,255,0.08);
+            overflow-x:auto;
+        }
+
+        .table-header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+        }
+
+        .table-header h2{
+            color:#c8ffd1;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        thead{
+            background:rgba(255,255,255,0.08);
+        }
+
+        th{
+            padding:18px;
+            text-align:left;
+            color:#b8ffcb;
+            font-size:15px;
+        }
+
+        td{
+            padding:18px;
+            border-top:1px solid rgba(255,255,255,0.08);
+            color:#f0f0f0;
+            font-size:14px;
+        }
+
+        tbody tr{
+            transition:0.3s;
+        }
+
+        tbody tr:hover{
+            background:rgba(255,255,255,0.05);
+        }
+
+        /* BADGES */
+
+        .badge{
+            padding:8px 14px;
+            border-radius:30px;
+            font-size:13px;
+            font-weight:600;
+        }
+
+        .high{
+            background:#ff4d4d33;
+            color:#ff8f8f;
+        }
+
+        .medium{
+            background:#ffc10733;
+            color:#ffd76a;
+        }
+
+        .low{
+            background:#28a74533;
+            color:#8fffaa;
+        }
+
+        /* BUTTON */
+
+        .btn{
+            text-decoration:none;
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:12px;
+            background:linear-gradient(135deg,#69ff97,#15803d);
+            color:white;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:scale(1.05);
+            box-shadow:0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* SCROLLBAR */
+
+        ::-webkit-scrollbar{
+            width:8px;
+            height:8px;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background:#58c777;
+            border-radius:10px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:900px){
+
+            .sidebar{
+                width:100%;
+                height:auto;
+                position:relative;
+                min-height:auto;
+            }
+
+            .main{
+                margin-left:0;
+                width:100%;
+            }
+
+            body{
+                flex-direction:column;
+            }
+
+            .topbar{
+                flex-direction:column;
+                gap:20px;
+                align-items:flex-start;
+            }
+
+            .search-box input{
+                width:100%;
+            }
+        }
 
     </style>
+
 </head>
+
 <body>
 
+<!-- SIDEBAR -->
 
-<div class="admin-container">
+<div class="sidebar">
 
-    <h1 class="title">🌱 Carbon Prediction Admin Panel 🛠</h1>
+    <h2>Carbon Dashboard</h2>
+
+    <a href="/admin">📊 Dashboard</a>
+
+    <a href="/admin/users">➕ Create User</a>
+
+    <a href="/">🏠 Home</a>
+
+    <a href="/login">🚪 Logout</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <h1> Dashboard</h1>
+
+        <div class="search-box">
+
+            <input type="text"
+                   id="searchInput"
+                   placeholder="Search records...">
+
+        </div>
+
+    </div>
+
+    <!-- CARDS -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Records</h3>
+            <div class="number"
+                 th:text="${#lists.size(admin)}">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>High Carbon Cases</h3>
+            <div class="number" th:text="${highCarbonCases}">
+                0
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Predictions Generated</h3>
+            <div class="number" th:text="${totalPredictions}">
+                0
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>System Status</h3>
+            <div class="number">
+                Active
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
 
     <div class="table-card">
 
-        <h2>Energy Records</h2>
+        <div class="table-header">
 
-        <table>
+            <h2>Energy Records</h2>
+
+        </div>
+
+        <table id="energyTable">
+
             <thead>
+
             <tr>
                 <th>ID</th>
                 <th>Electricity</th>
                 <th>Petrol</th>
                 <th>Waste</th>
-                <th>Calculated Carbon</th>
+                <th>Actual Carbon</th>
                 <th>Predicted Carbon</th>
-                <th>Suggested Electricity</th>
-                <th>Suggested Petrol</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th>Download</th>
             </tr>
+
             </thead>
 
-            <tr th:each="e : ${admin}">
-                <td th:text="${e.id}"></td>
-                <td th:text="${e.consumedElectricity}"></td>
-                <td th:text="${e.consumedPetrol}"></td>
-                <td th:text="${e.wastage}"></td>
-                <td th:text="${e.actualCarbon}"></td>
-                <td th:text="${e.predictedCarbon}"></td>
-                <td th:text="${e.suggestedElectricity}"></td>
-                <td th:text="${e.suggestedPetrol}"></td>
+            <tbody>
 
+            <tr th:each="e : ${admin}">
+
+                <td th:text="${e.id}"></td>
+
+                <td th:text="${e.consumedElectricity}"></td>
+
+                <td th:text="${e.consumedPetrol}"></td>
+
+                <td th:text="${e.wastage}"></td>
+
+                <td th:text="${e.actualCarbon}"></td>
+
+                <td th:text="${e.predictedCarbon}"></td>
+
+                <!-- STATUS -->
 
                 <td>
-                    <a th:href="@{/admin/download/{id}(id=${e.id})}">
-                        <button>⬇ Download</button>
+
+                    <span th:if="${e.predictedCarbon > 80}"
+                          class="badge high">
+                          High
+                    </span>
+
+                    <span th:if="${e.predictedCarbon <= 80 and e.predictedCarbon > 40}"
+                          class="badge medium">
+                          Medium
+                    </span>
+
+                    <span th:if="${e.predictedCarbon <= 40}"
+                          class="badge low">
+                          Low
+                    </span>
+
+                </td>
+
+                <!-- DOWNLOAD -->
+
+                <td>
+
+                    <a th:href="@{/download/{id}(id=${e.id})}"
+                       class="btn download-btn">
+
+                        ⬇ Download
+
                     </a>
+
                 </td>
 
             </tr>
 
+            </tbody>
 
         </table>
 
-        <a href="/" class="back-btn">⬅ Back to Dashboard</a>
-
     </div>
-
-
-
-
-
-
 
 </div>
 
+<!-- SEARCH SCRIPT -->
+
+<script>
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    searchInput.addEventListener("keyup", function () {
+
+        let filter =
+            searchInput.value.toLowerCase();
+
+        let rows =
+            document.querySelectorAll("#energyTable tbody tr");
+
+        rows.forEach(row => {
+
+            let text =
+                row.innerText.toLowerCase();
+
+            row.style.display =
+                text.includes(filter)
+                ? ""
+                : "none";
+        });
+    });
+
+</script>
 
 </body>
 </html>

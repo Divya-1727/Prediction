@@ -1,26 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        background: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e') no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Same overlay as login */
+    body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 50, 20, 0.75)
+        );
+        top: 0;
+        left: 0;
+    }
+
+    .card {
+        position: relative;
+        z-index: 1;
+        width: 380px;
+        padding: 35px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 25px rgba(0,0,0,0.6);
+        text-align: center;
+        color: #fff;
+    }
+
+    .card h2 {
+        margin-bottom: 20px;
+        color: #00e676;
+        letter-spacing: 1px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 6px;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        font-size: 14px;
+    }
+
+    input::placeholder {
+        color: #bbb;
+    }
+
+    select {
+        color: #ccc;
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        border: 1px solid #00e676;
+        box-shadow: 0 0 8px rgba(0,230,118,0.6);
+    }
+
+    label {
+        display: block;
+        text-align: left;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #00e676, #00c853);
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #00c853;
+        box-shadow: 0 5px 15px rgba(0,230,118,0.4);
+    }
+
+    p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    a {
+        color: #00e676;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
 <body>
 
-<h2>Register</h2>
+<div class="container">
+    <div class="card">
 
-<form th:action="@{/register}" method="post">
+        <h2>🌱 Carbon Prediction App</h2>
 
-    <input type="text" name="username" placeholder="Username" required/><br><br>
-    <input type="password" name="password" placeholder="Password" required/><br><br>
-    <!-- ✅ Role Dropdown -->
-    <label>Select Role:</label>
-    <select name="role" required>
-        <option value="">--Select Role--</option>
-        <option value="ROLE_USER">ROLE_USER</option>
-        <option value="ROLE_ADMIN">ROLE_ADMIN</option>
-    </select><br><br>
-    <button type="submit">Register</button>
-</form>
+        <form th:action="@{/register}" method="post">
 
-<p>
-    Already have account? <a th:href="@{/login}">Login</a>
-</p>
+            <input type="text" name="username" placeholder="Username" required/>
+            <input type="password" name="password" placeholder="Password" required/>
+
+            <label>Select Role:</label>
+            <select name="role" required>
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p>
+            Already have account? <a th:href="@{/login}">Login</a>
+        </p>
+
+    </div>
+</div>
+
+
 
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.carbonPrediction;
 
 import com.carbonPrediction.Entity.Role;
-import com.carbonPrediction.Entity.User;
 import com.carbonPrediction.Repository.RoleRepository;
 import com.carbonPrediction.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -37,18 +35,6 @@ public class CarbonPredictionApplication {
 							.orElseGet(() -> roleRepository.save(new Role(null, name))))
 					.collect(Collectors.toList());
 
-//			if (userRepository.findByUsername("admin").isEmpty()) {
-//
-//				User admin = new User();
-//				admin.setUsername("admin");
-//				admin.setPassword(passwordEncoder.encode("admin1234"));
-//				admin.setEnabled(true);
-//				admin.setRoles(adminRole.stream().collect(Collectors.toSet()));
-//
-//				userRepository.save(admin);
-//
-//				System.out.println("✅ Default admin created: admin / admin1234");
-//			}
 		};
 	}
 

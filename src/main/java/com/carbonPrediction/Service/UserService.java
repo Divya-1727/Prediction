@@ -31,8 +31,8 @@ public class UserService {
         user.setEnabled(true);
 
         Set<Role> roleSet = roles.stream()
-                .map(roleName -> roleRepository.findByName(roleName)
-                        .orElseThrow(() -> new RuntimeException("Role not found")))
+                .map(roleName -> roleRepository.findByName(roleName.toUpperCase())
+                        .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
                 .collect(Collectors.toSet());
 
         user.setRoles(roleSet);
@@ -43,4 +43,16 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+
+    public boolean isAdmin(User user) {
+        if (user.getRoles() == null) return false;
+        return user.getRoles().stream()
+                .anyMatch(role -> "ROLE_ADMIN".equalsIgnoreCase(role.getName().trim()));
+    }
+
+
+
+
+
 }

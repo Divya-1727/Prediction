@@ -12,30 +12,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-//        http
-//                .authorizeHttpRequests((authorize) -> authorize
-//                        .requestMatchers("/admin/**").hasRole("ADMIN")
-//                        .requestMatchers("/", "/create").hasAnyRole("USER", "ADMIN")
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin(form -> form
-//                        .defaultSuccessUrl("/", true)
-//                )
-//                .exceptionHandling(exception ->
-//                        exception.accessDeniedPage("/access-denied")
-//                );
-//
-//        return http.build();
-//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/download/**").authenticated()
+
+
+                        .requestMatchers("/admin").hasAnyRole("USER","ADMIN")
+
+
                         .requestMatchers("/login", "/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/", "/create").hasAnyRole("USER", "ADMIN")

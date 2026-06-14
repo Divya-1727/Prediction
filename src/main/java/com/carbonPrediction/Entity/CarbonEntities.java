@@ -20,7 +20,17 @@ private double actualCarbon;
 private double predictedCarbon;
 private double suggestedElectricity;
 private double suggestedPetrol;
+    private String explanation;
+
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
 
     public double getSuggestedElectricity() {
         return suggestedElectricity;
